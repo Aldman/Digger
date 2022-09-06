@@ -1,0 +1,14 @@
+C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обучение\Наследование\digger.csproj\bin\Debug\11-digger.exe.config
+C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обучение\Наследование\digger.csproj\bin\Debug\Images\Digger.png
+C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обучение\Наследование\digger.csproj\bin\Debug\Images\Gold.png
+C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обучение\Наследование\digger.csproj\bin\Debug\Images\Monster.png
+C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обучение\Наследование\digger.csproj\bin\Debug\Images\Sack.png
+C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обучение\Наследование\digger.csproj\bin\Debug\Images\Terrain.png
+C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обучение\Наследование\digger.csproj\bin\Debug\11-digger.exe
+C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обучение\Наследование\digger.csproj\bin\Debug\11-digger.pdb
+C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обучение\Наследование\digger.csproj\bin\Debug\nunit.framework.dll
+C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обучение\Наследование\digger.csproj\obj\Debug\Digger.csprojResolveAssemblyReference.cache
+C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обучение\Наследование\digger.csproj\obj\Debug\Digger.Properties.Resources.resources
+C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обучение\Наследование\digger.csproj\obj\Debug\Digger.csproj.GenerateResource.Cache
+C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обучение\Наследование\digger.csproj\obj\Debug\11-digger.exe
+C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обучение\Наследование\digger.csproj\obj\Debug\11-digger.pdb
