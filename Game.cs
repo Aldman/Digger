@@ -30,6 +30,14 @@ S TTST  TG
  TGST MTTT
  T  TMTTTT";
 
+        private const string mapWithGold = @"
+S
+ 
+ 
+ 
+ 
+T";
+
         public static ICreature[,] Map;
         public static int Scores;
         public static bool IsOver;
@@ -40,7 +48,7 @@ S TTST  TG
 
         public static void CreateMap()
         {
-            Map = CreatureMapCreator.CreateMap(mapWithPlayerTerrain);
+            Map = CreatureMapCreator.CreateMap(mapWithPlayerTerrainSackGold);
         }
     }
 }

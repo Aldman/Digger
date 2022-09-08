@@ -46,17 +46,27 @@ namespace Digger
             {
                 DeltaX = deltaX,
                 DeltaY = deltaY,
-                TransformTo = this.TransformTo    
+                TransformTo = this.TransformTo
             };
         }
 
         private bool CanPlayerPassWithoutObstacle(int x, int y
             , int deltaX, int deltaY)
-        => !(Game.Map[x + deltaX, y + deltaY]
-            .GetImageFileName() == "Sack.png"
-            || (x + deltaX < 0) || (x + deltaX >= Game.MapWidth)
-            || (y + deltaY < 0) || (y + deltaY >= Game.MapHeight));
-        
+        {
+            var isOutside = IsCreatureTryGoOutsideFromMap(
+                x, y, deltaX, deltaY);
+            if (!isOutside && Game.Map[x + deltaX, y + deltaY] != null)
+                return !(Game.Map[x + deltaX, y + deltaY]
+                 .GetImageFileName() == "Sack.png"
+                 || isOutside);
+            else return !isOutside;
+        }
+
+        public static bool IsCreatureTryGoOutsideFromMap(int x, int y
+            , int deltaX, int deltaY)
+            => (x + deltaX < 0) || (x + deltaX >= Game.MapWidth)
+            || (y + deltaY < 0) || (y + deltaY >= Game.MapHeight);
+
 
         private Direction GetKeyDirection(
             Keys keyPressed, ref int deltaX, ref int deltaY)
@@ -123,31 +133,43 @@ namespace Digger
 
     public class Sack : ICreature
     {
-        int FallenSteps;
-        ICreature TransformIn = null;
+        int fallenSteps;
+        ICreature transformIn = null;
 
         public CreatureCommand Act(int x, int y)
         {
-            var deltaY = 1;
-            if (!String.IsNullOrEmpty(Game.Map[x, y + deltaY].GetImageFileName()))
-                deltaY = 0;
-            if (FallenSteps > 1 && IsSackStopDrop(x, y, deltaY))
-                TransformIn = new Gold();
-            FallenSteps++;
+            var deltaY = 0;
+            if ((!Player.IsCreatureTryGoOutsideFromMap(x, y, 0, 1))
+                && Game.Map[x, y + 1] == null)
+            {
+                deltaY = 1;
+                fallenSteps++;
+            }
+            if ((!Player.IsCreatureTryGoOutsideFromMap(x, y, 0, 1))
+                && fallenSteps > 0 && (!IsSackStopDrop(x, y, 1)))
+                deltaY = 1;
+            if (fallenSteps > 1 && IsSackStopDrop(x, y, deltaY))
+                transformIn = new Gold();
+
             return new CreatureCommand()
             {
                 DeltaX = 0,
                 DeltaY = deltaY,
-                TransformTo = TransformIn
+                TransformTo = transformIn
             };
         }
 
         private bool IsSackStopDrop(int x, int y, int deltaY)
-        => Game.Map[x, y + deltaY].GetImageFileName() == "Terrain.png"
+        {
+            if (Player.IsCreatureTryGoOutsideFromMap(x, y, 0, deltaY)) return true;
+            else if (Game.Map[x, y + deltaY] == null) return false;
+            else if (Game.Map[x, y + deltaY].GetImageFileName() == "Digger.png")
+                return false;
+            return Game.Map[x, y + deltaY].GetImageFileName() == "Terrain.png"
             || Game.Map[x, y + deltaY].GetImageFileName() == "Sack.png"
             || Game.Map[x, y + deltaY].GetImageFileName() == "Gold.png"
-            || Game.Map[x, y + deltaY].GetImageFileName() == "Sack.png"
             || (y + deltaY >= Game.MapHeight);
+        }
 
         public bool DeadInConflict(ICreature conflictedObject)
         {
