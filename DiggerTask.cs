@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Digger
@@ -92,11 +89,9 @@ namespace Digger
 
         public bool DeadInConflict(ICreature conflictedObject)
         {
-            if (conflictedObject is Sack)
-                return true;
-            else if (conflictedObject is Gold)
+            if (conflictedObject is Gold)
                 Game.Scores += 10;
-            return false;
+            return (conflictedObject is Sack) || (conflictedObject is Monster);
         }
 
         public int GetDrawingPriority()
@@ -123,7 +118,8 @@ namespace Digger
 
         public bool DeadInConflict(ICreature conflictedObject)
         {
-            return conflictedObject is Player;
+            return (conflictedObject is Player)
+                    || (conflictedObject is Monster);
         }
 
         public int GetDrawingPriority() => 0;
@@ -145,11 +141,13 @@ namespace Digger
                 deltaY = 1;
                 fallenSteps++;
             }
-            if ((!Player.IsCreatureTryGoOutsideFromMap(x, y, 0, 1))
+            else if ((!Player.IsCreatureTryGoOutsideFromMap(x, y, 0, 1))
                 && fallenSteps > 0 && (!IsSackStopDrop(x, y, 1)))
-                deltaY = 1;
+            { deltaY = 1; fallenSteps++; }
             if (fallenSteps > 1 && IsSackStopDrop(x, y, deltaY))
                 transformIn = new Gold();
+            else if (IsSackStopDrop(x, y, deltaY))
+                fallenSteps = 0;
 
             return new CreatureCommand()
             {
@@ -163,7 +161,8 @@ namespace Digger
         {
             if (Player.IsCreatureTryGoOutsideFromMap(x, y, 0, deltaY)) return true;
             else if (Game.Map[x, y + deltaY] == null) return false;
-            else if (Game.Map[x, y + deltaY].GetImageFileName() == "Digger.png")
+            else if (Game.Map[x, y + deltaY].GetImageFileName() == "Digger.png"
+                  || Game.Map[x, y + deltaY].GetImageFileName() == "Monster.png")
                 return false;
             return Game.Map[x, y + deltaY].GetImageFileName() == "Terrain.png"
             || Game.Map[x, y + deltaY].GetImageFileName() == "Sack.png"
@@ -179,5 +178,98 @@ namespace Digger
         public int GetDrawingPriority() => 0;
 
         public string GetImageFileName() => "Sack.png";
+    }
+
+    public class Monster : ICreature
+    {
+        bool wasCheckEnvironment = false;
+        bool isDiggerExist = false;
+        Point diggerCoordinates;
+
+        public CreatureCommand Act(int x, int y)
+        {
+            int deltaX = 0, deltaY = 0;
+            if (!wasCheckEnvironment || GetKeyDirection(Game.KeyPressed) != Direction.Other)
+                isDiggerExist = HasMapDigger(diggerCoordinates);
+            wasCheckEnvironment = true;
+            if (isDiggerExist)
+            {
+                deltaX = (diggerCoordinates.X - x);
+                if (deltaX != 0) deltaX /= Math.Abs(deltaX);
+
+                deltaY = diggerCoordinates.Y - y;
+                if (deltaY != 0) deltaY /= Math.Abs(deltaY);
+            }
+            UpdateMonsterMoving(x, y, ref deltaX, ref deltaY);
+
+            return new CreatureCommand
+            {
+                DeltaX = deltaX,
+                DeltaY = deltaY,
+            };
+        }
+
+        private Direction GetKeyDirection(Keys keyPressed)
+        {
+            switch (keyPressed)
+            {
+                case Keys.Left: return Direction.Left;
+                case Keys.Right: return Direction.Right;
+                case Keys.Up: return Direction.Up;
+                case Keys.Down: return Direction.Down;
+                default: return Direction.Other;
+            }
+        }
+
+        enum Direction
+        {
+            Right,
+            Left,
+            Up,
+            Down,
+            Other
+        }
+
+        private void UpdateMonsterMoving(int x, int y, ref int deltaX, ref int deltaY)
+        {
+            if (Game.Map[x + deltaX, y] == null) { deltaY = 0; return; }
+            else if (Game.Map[x, y + deltaY] == null) { deltaX = 0; return; }
+            else if (Game.Map[x + deltaX, y].GetImageFileName() == "Digger.png")
+            { deltaY = 0; return; }
+            else if (Game.Map[x, y + deltaY].GetImageFileName() == "Digger.png")
+            { deltaX = 0; return; }
+            else if (Game.Map[x + deltaX, y].GetImageFileName() == "Sack.png"
+                  || Game.Map[x + deltaX, y].GetImageFileName() == "Monster.png"
+                  || Game.Map[x + deltaX, y].GetImageFileName() == "Terrain.png")
+            { deltaX = 0; return; }
+            else if (Game.Map[x, y + deltaY].GetImageFileName() == "Monster.png"
+                  || Game.Map[x, y + deltaY].GetImageFileName() == "Terrain.png")
+            { deltaY = 0; return; }
+            else return;
+        }
+
+        private bool HasMapDigger(Point diggerCoordinates)
+        {
+            for (int i = 0; i < Game.MapHeight; i++)
+                for (int j = 0; j < Game.MapWidth; j++)
+                    if (Game.Map[j, i] != null
+                                  && Game.Map[j, i]
+                                  .GetImageFileName()
+                                  == "Digger.png")
+                    {
+                        diggerCoordinates = new Point(j, i);
+                        return true;
+                    }
+            return false;
+        }
+
+        public bool DeadInConflict(ICreature conflictedObject)
+        {
+            return conflictedObject is Sack || conflictedObject is Monster;
+        }
+
+        public int GetDrawingPriority() => 1;
+
+        public string GetImageFileName() => "Monster.png";
     }
 }

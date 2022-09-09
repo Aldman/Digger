@@ -15,3 +15,14 @@ C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обуче
 C:\Users\AleshkinDV\Desktop\C# наброски\VS15\Курс\Наследование\Digger\bin\Debug\11-digger.exe.config
 C:\Users\AleshkinDV\Desktop\C# наброски\VS15\Курс\Наследование\Digger\obj\Debug\11-digger.exe
 C:\Users\AleshkinDV\Desktop\C# наброски\VS15\Курс\Наследование\Digger\obj\Debug\11-digger.pdb
+C:\Users\AleshkinDV\Desktop\C# наброски\VS15\Курс\Наследование\Digger\bin\Debug\Images\Digger.png
+C:\Users\AleshkinDV\Desktop\C# наброски\VS15\Курс\Наследование\Digger\bin\Debug\Images\Gold.png
+C:\Users\AleshkinDV\Desktop\C# наброски\VS15\Курс\Наследование\Digger\bin\Debug\Images\Monster.png
+C:\Users\AleshkinDV\Desktop\C# наброски\VS15\Курс\Наследование\Digger\bin\Debug\Images\Sack.png
+C:\Users\AleshkinDV\Desktop\C# наброски\VS15\Курс\Наследование\Digger\bin\Debug\Images\Terrain.png
+C:\Users\AleshkinDV\Desktop\C# наброски\VS15\Курс\Наследование\Digger\bin\Debug\11-digger.exe
+C:\Users\AleshkinDV\Desktop\C# наброски\VS15\Курс\Наследование\Digger\bin\Debug\11-digger.pdb
+C:\Users\AleshkinDV\Desktop\C# наброски\VS15\Курс\Наследование\Digger\bin\Debug\nunit.framework.dll
+C:\Users\AleshkinDV\Desktop\C# наброски\VS15\Курс\Наследование\Digger\obj\Debug\Digger.csprojResolveAssemblyReference.cache
+C:\Users\AleshkinDV\Desktop\C# наброски\VS15\Курс\Наследование\Digger\obj\Debug\Digger.Properties.Resources.resources
+C:\Users\AleshkinDV\Desktop\C# наброски\VS15\Курс\Наследование\Digger\obj\Debug\Digger.csproj.GenerateResource.Cache
