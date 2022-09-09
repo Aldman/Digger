@@ -12,3 +12,6 @@ C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обуче
 C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обучение\Наследование\digger.csproj\obj\Debug\Digger.csproj.GenerateResource.Cache
 C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обучение\Наследование\digger.csproj\obj\Debug\11-digger.exe
 C:\Users\alyos\OneDrive\Рабочий стол\Проекты\VS2015\Обучение\Наследование\digger.csproj\obj\Debug\11-digger.pdb
+C:\Users\AleshkinDV\Desktop\C# наброски\VS15\Курс\Наследование\Digger\bin\Debug\11-digger.exe.config
+C:\Users\AleshkinDV\Desktop\C# наброски\VS15\Курс\Наследование\Digger\obj\Debug\11-digger.exe
+C:\Users\AleshkinDV\Desktop\C# наброски\VS15\Курс\Наследование\Digger\obj\Debug\11-digger.pdb
